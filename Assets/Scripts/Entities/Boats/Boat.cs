@@ -73,4 +73,23 @@ public class Boat : Entity, Damagable
     public void OnRepairEnd()
     {
     }
+
+    public Interactable GetInteractableByInteracbleTypeAndId (InteractableType type, int id)
+    {
+        Interactable interactable = null;
+
+        switch(type)
+        {
+            case InteractableType.MOOUNTABLE:
+                if (this.walls.ContainsKey(id))
+                    interactable = this.mountables[id];
+                break;
+            case InteractableType.WALL:
+                if (this.walls.ContainsKey(id))
+                    interactable = this.walls[id];
+                break;
+        }
+
+        return interactable;
+    }
 }

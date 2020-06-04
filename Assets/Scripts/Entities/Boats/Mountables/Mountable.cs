@@ -44,7 +44,7 @@ public abstract class Mountable : MonoBehaviour, Interactable
         return this.transform.position;
     }
 
-    public void Interact(Pirate pirate)
+    public void Interact(Pirate pirate, InteractionType interactionType)
     {
         this.pirate = pirate;
         this.mounted = true;
@@ -74,5 +74,10 @@ public abstract class Mountable : MonoBehaviour, Interactable
     public Transform GetSeat()
     {
         return this.seat.transform;
+    }
+
+    public InteractableType GetInteractableType()
+    {
+        return InteractableType.MOOUNTABLE;
     }
 }

@@ -105,7 +105,7 @@ public class PirateManager : MonoBehaviour
         pirate.HandleMovement(pos);
     }
 
-    public static void MountRequest(int fromClient, Packet packet)
+    public static void IneractRequest(int fromClient, Packet packet)
     {
         int clientId = packet.ReadInt();
 
@@ -115,33 +115,14 @@ public class PirateManager : MonoBehaviour
             return;
         }
 
-        int mountableId = packet.ReadInt();
-        Pirate pirate = PirateManager.instance.Pirates[fromClient];
-        Mountable mountable;
+        int id = packet.ReadInt();
+        InteractableType interactableType = (InteractableType) packet.ReadInt();
+        InteractionType interactionType = (InteractionType) packet.ReadInt();
 
-        if (pirate.boat.mountables.TryGetValue(mountableId, out mountable))
-        {
-            pirate.BeginInteractWith(mountable);
-        }
-    }
+        Pirate pirate = PirateManager.instance.Pirates[clientId];
+        Interactable interactable = pirate.boat.GetInteractableByInteracbleTypeAndId(interactableType, id);
 
-    public static void ReapairWallRequest(int fromClient, Packet packet)
-    {
-        int clientId = packet.ReadInt();
-
-        if (fromClient != clientId)
-        {
-            Debug.Log($"Player (ID: {fromClient}) has assumed the wrong client ID ({clientId})!");
-            return;
-        }
-
-        int wallId = packet.ReadInt();
-        Pirate pirate = PirateManager.instance.Pirates[fromClient];
-        Wall wall;
-
-        if (pirate.boat.walls.TryGetValue(wallId, out wall))
-        {
-            pirate.BeginInteractWith(wall);
-        }
+        if (interactable != null)
+            pirate.BeginInteractWith(interactable, interactionType);
     }
 }

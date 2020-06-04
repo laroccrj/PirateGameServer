@@ -131,9 +131,8 @@ public class Server
                 { (int)ClientPackets.changeTeam, GameManager.HandleRequestChangeTeam },
                 { (int)ClientPackets.startGame, GameManager.HandleRequestStartGame },
                 { (int)ClientPackets.pirateMovement, PirateManager.MovePirate },
-                { (int)ClientPackets.requestMount, PirateManager.MountRequest },
-                { (int)ClientPackets.requestRepairWall, PirateManager.ReapairWallRequest },
                 { (int)ClientPackets.playerInput, InputManager.RecieveInputs },
+                { (int)ClientPackets.interactionRequest, PirateManager.IneractRequest },
             };
         Debug.Log("Initialized packets.");
     }

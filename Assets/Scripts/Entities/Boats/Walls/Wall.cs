@@ -49,7 +49,7 @@ public class Wall : MonoBehaviour, Damagable, Interactable
         return this.repairSpot.position;
     }
 
-    public void Interact(Pirate pirate)
+    public void Interact(Pirate pirate, InteractionType interactionType)
     {
         this.repairing = true;
     }
@@ -62,5 +62,10 @@ public class Wall : MonoBehaviour, Damagable, Interactable
     public Transform GetSeat()
     {
         return this.repairSpot.transform;
+    }
+
+    public InteractableType GetInteractableType()
+    {
+        return InteractableType.WALL;
     }
 }

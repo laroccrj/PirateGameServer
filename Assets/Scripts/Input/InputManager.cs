@@ -9,10 +9,9 @@ public class InputManager : MonoBehaviour
     {
         Left,
         Right,
-        Use
+        Use,
+        SWITCH_INTERACTION_TYPE,
     }
-
-    public delegate void InputHandle(Inputs input, bool down);
 
     public static InputManager instance;
 

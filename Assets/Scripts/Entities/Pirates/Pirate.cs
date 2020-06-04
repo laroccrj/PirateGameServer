@@ -12,6 +12,7 @@ public class Pirate : MonoBehaviour
 
     public Interactable toInteractWith = null;
     public Interactable isIinteractingWith = null;
+    public InteractionType interactionType = InteractionType.USE;
     public float interactionReach = 0.1f;
 
     private void Start()
@@ -42,7 +43,7 @@ public class Pirate : MonoBehaviour
             {
                 this.isIinteractingWith = this.toInteractWith;
                 this.toInteractWith = null;
-                this.isIinteractingWith.Interact(this);
+                this.isIinteractingWith.Interact(this, interactionType);
             }
         }
         else if (Vector2.Distance(this.transform.localPosition, this.destination) > this.interactionReach)
@@ -59,10 +60,11 @@ public class Pirate : MonoBehaviour
         this.LeaveInteractable();
     }
 
-    public void BeginInteractWith(Interactable interactable)
+    public void BeginInteractWith(Interactable interactable, InteractionType interactionType)
     {
         this.LeaveInteractable();
         this.toInteractWith = interactable;
+        this.interactionType = interactionType;
     }
 
     public void LeaveInteractable()

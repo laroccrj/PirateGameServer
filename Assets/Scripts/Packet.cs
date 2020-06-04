@@ -32,9 +32,8 @@ public enum ClientPackets
     changeTeam,
     startGame,
     pirateMovement,
-    requestMount,
-    requestRepairWall,
-    playerInput
+    playerInput,
+    interactionRequest
 }
 
 public class Packet : IDisposable
