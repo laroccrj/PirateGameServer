@@ -45,7 +45,7 @@ public class Pirate : MonoBehaviour
                 this.isIinteractingWith.Interact(this);
             }
         }
-        else
+        else if (Vector2.Distance(this.transform.localPosition, this.destination) > this.interactionReach)
         {
             Vector2 direction = this.destination - (Vector2)this.transform.localPosition;
             transform.Translate(direction.normalized * speed * Time.deltaTime);
