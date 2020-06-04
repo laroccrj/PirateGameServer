@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour, Damagable
+public class Wall : MonoBehaviour, Damagable, Interactable
 {
     public int id;
     public float maxHealth = 100;
     public float health = 100;
     public Boat boat;
     public Transform repairSpot;
-    public Pirate repairer = null;
+    public bool repairing = false;
     public float repairRate = 0.5f;
 
     void Start()
@@ -24,7 +24,7 @@ public class Wall : MonoBehaviour, Damagable
     {
         float currentHealth = this.health;
 
-        if (repairer != null && Vector3.Distance(repairer.transform.position, this.repairSpot.position) < .1)
+        if (repairing)
             this.health += repairRate;
 
         if (this.health > this.maxHealth)
@@ -44,13 +44,23 @@ public class Wall : MonoBehaviour, Damagable
         WallManager.UpdateWallHealth(this);
     }
 
-    public void OnRepairStart(Pirate pirate)
+    public Vector3 GetInteractionPoint()
     {
-        this.repairer = pirate;
+        return this.repairSpot.position;
     }
 
-    public void OnRepairEnd()
+    public void Interact(Pirate pirate)
     {
-        this.repairer = null;
+        this.repairing = true;
+    }
+
+    public void Leave()
+    {
+        this.repairing = false;
+    }
+
+    public Transform GetSeat()
+    {
+        return this.repairSpot.transform;
     }
 }

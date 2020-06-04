@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Mountable : MonoBehaviour
+public abstract class Mountable : MonoBehaviour, Interactable
 {
     public enum Mountables
     {
@@ -15,7 +15,7 @@ public abstract class Mountable : MonoBehaviour
     public bool mounted = false;
     public Transform seat = null;
     public Transform body = null;
-    public Mounter mounter = null;
+    public Pirate pirate = null;
 
     // Used when the mountable is facing -y
     public bool reverseRotation = false;
@@ -36,37 +36,43 @@ public abstract class Mountable : MonoBehaviour
         this.boat = this.GetComponentInParent<Boat>();
     }
 
-    public void mount(Mounter mounter)
-    {
-        this.mounted = true;
-        this.mounter = mounter;
-        this.OnMount();
+    protected abstract void OnMount();
+    protected abstract void OnDismount();
 
-        Pirate pirate = mounter.pirate;
+    public Vector3 GetInteractionPoint()
+    {
+        return this.transform.position;
+    }
+
+    public void Interact(Pirate pirate)
+    {
+        this.pirate = pirate;
+        this.mounted = true;
+        this.OnMount();
 
         using (Packet packet = new Packet((int)ServerPackets.mounted))
         {
             packet.Write(this.id);
-            ServerSend.SendTCPData(pirate.id, packet);
+            ServerSend.SendTCPData(this.pirate.id, packet);
         }
     }
 
-    public void dismount()
+    public void Leave()
     {
         this.mounted = false;
         this.OnDismount();
 
-        Pirate pirate = mounter.pirate;
-
         using (Packet packet = new Packet((int)ServerPackets.dismounted))
         {
             packet.Write(this.id);
-            ServerSend.SendTCPData(pirate.id, packet);
+            ServerSend.SendTCPData(this.pirate.id, packet);
         }
 
-        this.mounter = null;
+        this.pirate = null;
     }
 
-    protected abstract void OnMount();
-    protected abstract void OnDismount();
+    public Transform GetSeat()
+    {
+        return this.seat.transform;
+    }
 }

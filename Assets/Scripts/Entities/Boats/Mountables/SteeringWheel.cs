@@ -29,8 +29,8 @@ public class SteeringWheel : Mountable
     {
         if (this.mounted)
         {
-            bool left = mounter.pirate.networkInput.GetInput(InputManager.Inputs.Left);
-            bool right = mounter.pirate.networkInput.GetInput(InputManager.Inputs.Right);
+            bool left = this.pirate.networkInput.GetInput(InputManager.Inputs.Left);
+            bool right = this.pirate.networkInput.GetInput(InputManager.Inputs.Right);
 
             if (left && !right)
             {

@@ -102,14 +102,7 @@ public class PirateManager : MonoBehaviour
 
         Vector3 pos = packet.ReadVector3();
         Pirate pirate = PirateManager.instance.Pirates[fromClient];
-        pirate.destination = pos;
-        pirate.mounter.dismount();
-
-        if (pirate.repairing != null)
-        {
-            pirate.repairing.repairer = null;
-            pirate.repairing = null;
-        }
+        pirate.HandleMovement(pos);
     }
 
     public static void MountRequest(int fromClient, Packet packet)
@@ -128,9 +121,7 @@ public class PirateManager : MonoBehaviour
 
         if (pirate.boat.mountables.TryGetValue(mountableId, out mountable))
         {
-            pirate.mounter.dismount();
-            pirate.destination = mountable.transform.localPosition;
-            pirate.mounter.mount(mountable);
+            pirate.BeginInteractWith(mountable);
         }
     }
 
@@ -150,9 +141,7 @@ public class PirateManager : MonoBehaviour
 
         if (pirate.boat.walls.TryGetValue(wallId, out wall))
         {
-            pirate.destination = wall.transform.localPosition;
-            wall.repairer = pirate;
-            pirate.repairing = wall;
+            pirate.BeginInteractWith(wall);
         }
     }
 }

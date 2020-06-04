@@ -25,9 +25,9 @@ public class Cannon : Mountable
     { 
         if (this.mounted)
         {
-            bool left = mounter.pirate.networkInput.GetInput(InputManager.Inputs.Left);
-            bool right = mounter.pirate.networkInput.GetInput(InputManager.Inputs.Right);
-            bool fire = mounter.pirate.networkInput.GetInputDown(InputManager.Inputs.Use);
+            bool left = this.pirate.networkInput.GetInput(InputManager.Inputs.Left);
+            bool right = this.pirate.networkInput.GetInput(InputManager.Inputs.Right);
+            bool fire = this.pirate.networkInput.GetInputDown(InputManager.Inputs.Use);
             Vector3 rotation = Vector3.zero;
 
             if (left && !right)

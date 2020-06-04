@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5627116158267938194}
   - component: {fileID: 2347948743425399001}
-  - component: {fileID: -942576279041032249}
   - component: {fileID: 1719602794930139900}
   m_Layer: 0
   m_Name: Pirate
@@ -48,26 +47,10 @@ MonoBehaviour:
   id: 0
   destination: {x: 0, y: 0}
   speed: 1
-  distanceFromDestination: 0.1
   boat: {fileID: 0}
-  mounter: {fileID: -942576279041032249}
+  mounter: {fileID: 0}
   networkInput: {fileID: 1719602794930139900}
---- !u!114 &-942576279041032249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5020914462325835541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1fd21c5788af7c459336400891badb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pirate: {fileID: 2347948743425399001}
-  mountDistance: 0.11
-  mountable: {fileID: 0}
-  mounterState: 0
+  interactionReach: 0.1
 --- !u!114 &1719602794930139900
 MonoBehaviour:
   m_ObjectHideFlags: 0
