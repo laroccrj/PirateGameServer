@@ -17,8 +17,6 @@ public enum ServerPackets
     boatTransformUpdate,
     pirateSpawn,
     pirateMove,
-    mounted,
-    dismounted,
     projectileSpawn,
     projectileUpdate,
     projectileHit,
