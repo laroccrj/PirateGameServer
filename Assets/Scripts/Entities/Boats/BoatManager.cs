@@ -66,6 +66,8 @@ public class BoatManager : MonoBehaviour
                     {
                         packet.Write(mountable.id);
                         packet.Write((int)mountable.MountableType);
+                        packet.Write(mountable.maxHealth);
+                        packet.Write(mountable.health);
                         packet.Write(mountable.reverseRotation);
                         packet.Write(mountable.transform.localPosition);
                         packet.Write(mountable.transform.localRotation);
@@ -111,6 +113,8 @@ public class BoatManager : MonoBehaviour
                     foreach (Mountable mountable in mountables)
                     {
                         packet.Write(mountable.id);
+                        packet.Write(mountable.maxHealth);
+                        packet.Write(mountable.health);
                         packet.Write(mountable.body.transform.localPosition);
                         packet.Write(mountable.body.transform.localRotation);
                     }

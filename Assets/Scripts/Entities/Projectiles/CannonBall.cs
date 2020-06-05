@@ -20,10 +20,13 @@ public class CannonBall : Projectile
 
             foreach(Collider2D collider in colliders)
             {
+                Debug.Log(collider.gameObject.name);
                 Damagable damagable = collider.GetComponent<Damagable>();
 
                 if (damagable == null)
                     continue;
+
+                Debug.Log("Has collider");
 
                 Vector2 damagePoint = collider.ClosestPoint(this.transform.position);
                 float distance = Vector2.Distance(this.transform.position, damagePoint);

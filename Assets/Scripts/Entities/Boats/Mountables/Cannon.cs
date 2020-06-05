@@ -66,4 +66,10 @@ public class Cannon : Mountable
             }
         }
     }
+
+    public override void ApplyDamage(float damage)
+    {
+        Debug.Log("Apply damage");
+        this.health -= damage;
+    }
 }

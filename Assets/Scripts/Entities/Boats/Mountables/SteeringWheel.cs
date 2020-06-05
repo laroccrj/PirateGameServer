@@ -90,4 +90,9 @@ public class SteeringWheel : Mountable
 
         this.boat.rigid.AddTorque(this.boat.rotateSpeed * Time.deltaTime * this.boat.rigid.velocity.magnitude * this.currentBoatRotateSpeed);
     }
+
+    public override void ApplyDamage(float damage)
+    {
+        // Steering wheel can be damaged
+    }
 }
