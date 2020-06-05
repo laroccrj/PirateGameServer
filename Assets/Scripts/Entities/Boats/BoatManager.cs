@@ -45,83 +45,66 @@ public class BoatManager : MonoBehaviour
 
     public static void SendBoatsToPlayers()
     {
-        using (Packet packet = new Packet((int)ServerPackets.sendBoats))
+        Packet packet = new Packet((int)ServerPackets.sendBoats);
+
+        packet.Write(Boats.Count);
+
+        foreach (Boat boat in Boats.Values)
         {
-            int boatCount = Boats.Count;
+            packet.Write(boat.id);
+            packet.Write(boat.transform.position);
+            packet.Write(boat.transform.rotation);
+            packet.Write(boat.boatEntitiesByType.Count);
 
-            if (boatCount > 0)
+            foreach(KeyValuePair<BoatEntityType, Dictionary<int, BoatEntity>> entitiesOfType in boat.boatEntitiesByType)
             {
-                packet.Write(boatCount);
+                packet.Write((int)entitiesOfType.Key);
+                packet.Write(entitiesOfType.Value.Count);
 
-                foreach (Boat boat in Boats.Values)
+                foreach (BoatEntity entity in entitiesOfType.Value.Values)
                 {
-                    packet.Write(boat.id);
-                    packet.Write(boat.transform.position);
-                    packet.Write(boat.transform.rotation);
+                    packet.Write(entity.id);
+                    packet.Write(entity.transform.localPosition);
+                    packet.Write(entity.transform.localRotation);
+                    packet.Write(entity.transform.localScale);
 
-                    Mountable[] mountables = boat.mountables.Values.ToArray<Mountable>();
-                    packet.Write(mountables.Length);
-
-                    foreach (Mountable mountable in mountables)
-                    {
-                        packet.Write(mountable.id);
-                        packet.Write((int)mountable.MountableType);
-                        packet.Write(mountable.maxHealth);
-                        packet.Write(mountable.health);
-                        packet.Write(mountable.reverseRotation);
-                        packet.Write(mountable.transform.localPosition);
-                        packet.Write(mountable.transform.localRotation);
-                    }
-
-                    Wall[] walls = boat.walls.Values.ToArray<Wall>();
-                    packet.Write(walls.Length);
-
-                    foreach (Wall wall in walls)
-                    {
-                        packet.Write(wall.id);
-                        packet.Write(wall.maxHealth);
-                        packet.Write(wall.health);
-                        packet.Write(wall.transform.localPosition);
-                        packet.Write(wall.transform.localRotation);
-                        packet.Write(wall.transform.localScale);
-                    }
+                    entity.WriteDataToPacket(ref packet);
                 }
-
-                ServerSend.SendTCPDataToAll(packet);
             }
         }
+
+        ServerSend.SendTCPDataToAll(packet);
+        packet.Dispose();
     }
 
     void SendBoatTransformUpdate()
     {
-        using (Packet packet = new Packet((int)ServerPackets.boatTransformUpdate))
+        foreach (Boat boat in Boats.Values)
         {
-            int boatCount = BoatManager.Boats.Count;
-            packet.Write(boatCount);
+            Packet packet = new Packet((int)ServerPackets.boatTransformUpdate);
 
-            if (boatCount > 0)
+            packet.Write(boat.id);
+            packet.Write(boat.transform.position);
+            packet.Write(boat.transform.rotation);
+            packet.Write(boat.boatEntitiesByType.Count);
+
+            foreach (KeyValuePair<BoatEntityType, Dictionary<int, BoatEntity>> entitiesOfType in boat.boatEntitiesByType)
             {
-                foreach (Boat boat in BoatManager.Boats.Values)
+                packet.Write((int)entitiesOfType.Key);
+                packet.Write(entitiesOfType.Value.Count);
+
+                foreach (BoatEntity entity in entitiesOfType.Value.Values)
                 {
-                    packet.Write(boat.id);
-                    packet.Write(boat.transform.position);
-                    packet.Write(boat.transform.rotation);
-
-                    Mountable[] mountables = boat.mountables.Values.ToArray<Mountable>();
-                    packet.Write(mountables.Length);
-
-                    foreach (Mountable mountable in mountables)
-                    {
-                        packet.Write(mountable.id);
-                        packet.Write(mountable.maxHealth);
-                        packet.Write(mountable.health);
-                        packet.Write(mountable.body.transform.localPosition);
-                        packet.Write(mountable.body.transform.localRotation);
-                    }
+                    packet.Write(entity.id);
+                    packet.Write(entity.transform.localPosition);
+                    packet.Write(entity.transform.localRotation);
+                    packet.Write(entity.transform.localScale);
+                    entity.WriteDataToPacket(ref packet);
                 }
-
-                ServerSend.SendUDPDataToAll(packet);
             }
+
+            ServerSend.SendUDPDataToAll(packet);
+            packet.Dispose();
         }
     }
 }

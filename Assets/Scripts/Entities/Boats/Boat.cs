@@ -1,13 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Boat : Entity, Damagable
+public class Boat : MonoBehaviour, Damagable
 {
-    public override EntityType EntityType => EntityType.BOAT;
-    public Dictionary<int, Mountable> mountables = new Dictionary<int, Mountable>();
-    public Dictionary<int, Wall> walls = new Dictionary<int, Wall>();
+    public int id;
+    public Dictionary<BoatEntityType, Dictionary<int, BoatEntity>> boatEntitiesByType;
     public int acceleration = 1;
     public int maxSpeed = 1;
     public int rotateSpeed = 1;
@@ -15,16 +15,12 @@ public class Boat : Entity, Damagable
     public float health;
     public Team team;
 
-    private int nextMountableId = 1;
-    private int nextWallId = 1;
-
     // Start is called before the first frame update
     public void Init(Team team)
     {
         this.id = BoatManager.getNextId();
         this.team = team;
-        this.LoadMountables();
-        this.LoadWalls();
+        this.LoadBoatEntities();
         this.rigid = this.GetComponent<Rigidbody2D>();
     }
 
@@ -37,25 +33,23 @@ public class Boat : Entity, Damagable
 
     }
 
-    private void LoadMountables()
+    private void LoadBoatEntities ()
     {
-        Mountable[] mountables = this.GetComponentsInChildren<Mountable>();
+        this.boatEntitiesByType = new Dictionary<BoatEntityType, Dictionary<int, BoatEntity>>();
 
-        foreach(Mountable mountable in mountables)
+        foreach (BoatEntityType boatEntityType in Enum.GetValues(typeof(BoatEntityType)).Cast<BoatEntityType>())
         {
-            mountable.id = this.nextMountableId++;
-            this.mountables.Add(mountable.id, mountable);
+            this.boatEntitiesByType[boatEntityType] = new Dictionary<int, BoatEntity>();
         }
-    }
 
-    private void LoadWalls()
-    {
-        Wall[] walls = this.GetComponentsInChildren<Wall>();
+        BoatEntity[] entities = this.GetComponentsInChildren<BoatEntity>();
 
-        foreach(Wall wall in walls)
+        foreach (BoatEntity entity in entities)
         {
-            wall.id = this.nextWallId++;
-            this.walls.Add(wall.id, wall);
+            entity.id = entity.GetNextId();
+            entity.boat = this;
+
+            this.boatEntitiesByType[entity.BoatEntityType][entity.id] = entity;
         }
     }
 
@@ -74,20 +68,14 @@ public class Boat : Entity, Damagable
     {
     }
 
-    public Interactable GetInteractableByInteracbleTypeAndId (InteractableType type, int id)
+    public Interactable GetInteractableEntityByTypeAndId (BoatEntityType type, int id)
     {
         Interactable interactable = null;
 
-        switch(type)
+        if (this.boatEntitiesByType.ContainsKey(type))
         {
-            case InteractableType.MOOUNTABLE:
-                if (this.walls.ContainsKey(id))
-                    interactable = this.mountables[id];
-                break;
-            case InteractableType.WALL:
-                if (this.walls.ContainsKey(id))
-                    interactable = this.walls[id];
-                break;
+            if (this.boatEntitiesByType[type].ContainsKey(id))
+                interactable = this.boatEntitiesByType[type][id] as Interactable;
         }
 
         return interactable;
