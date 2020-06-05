@@ -1,94 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4196855471098035788
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5166461741086519468}
-  m_Layer: 0
-  m_Name: Seat
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5166461741086519468
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4196855471098035788}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4566544926923395279}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4566544926923395264
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4566544926923395279}
-  - component: {fileID: 4566544926923395278}
-  m_Layer: 0
-  m_Name: SteeringWheel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4566544926923395279
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4566544926923395264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5166461741086519468}
-  - {fileID: 7402383527935409950}
-  m_Father: {fileID: 4566544927350717040}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4566544926923395278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4566544926923395264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0637b99b67c512d418bca5dd104cd82d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  boat: {fileID: 4566544927350717041}
-  mounted: 0
-  seat: {fileID: 5166461741086519468}
-  body: {fileID: 7402383527935409950}
-  pirate: {fileID: 0}
-  health: 100
-  maxHealth: 100
-  reverseRotation: 0
-  state: 0
-  maxBoatRotationSpeed: 3
-  boatRotateSpeedStep: 3
-  bodyRotationSpeed: 1
-  breaking: 0
 --- !u!1 &4566544927350717042
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,10 +31,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4566544926923395279}
   - {fileID: 4566544927549207497}
   - {fileID: 4377881821490469599}
   - {fileID: 8583151585561266430}
+  - {fileID: 3745828163082005142}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -276,37 +187,7 @@ Transform:
   - {fileID: 8444912248116083960}
   - {fileID: 8444912247380560951}
   m_Father: {fileID: 4566544927350717040}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5486246003035402209
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7402383527935409950}
-  m_Layer: 0
-  m_Name: Body
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7402383527935409950
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5486246003035402209}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4566544926923395279}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3974997207682319264
 PrefabInstance:
@@ -358,7 +239,7 @@ PrefabInstance:
     - target: {fileID: 858879883982887295, guid: 4f7a22c42e2531642a452d4bce0d4fdd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 858879883982887295, guid: 4f7a22c42e2531642a452d4bce0d4fdd,
         type: 3}
@@ -382,6 +263,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 858879883982887295, guid: 4f7a22c42e2531642a452d4bce0d4fdd,
     type: 3}
   m_PrefabInstance: {fileID: 3974997207682319264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4546807898484390762
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4566544927350717040}
+    m_Modifications:
+    - target: {fileID: 928405008329871859, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_Name
+      value: SteeringWheel
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.9722345
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0036413043
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7f8cb855e92eb604385d899450d20ceb, type: 3}
+--- !u!4 &3745828163082005142 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 928405008329871868, guid: 7f8cb855e92eb604385d899450d20ceb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4546807898484390762}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4566544926690333759
 PrefabInstance:
@@ -898,7 +854,7 @@ PrefabInstance:
     - target: {fileID: 858879883982887295, guid: 4f7a22c42e2531642a452d4bce0d4fdd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 858879883982887295, guid: 4f7a22c42e2531642a452d4bce0d4fdd,
         type: 3}

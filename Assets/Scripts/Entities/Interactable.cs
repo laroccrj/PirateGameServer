@@ -8,12 +8,6 @@ public enum InteractionType
     REPAIR
 }
 
-public enum InteractableType
-{
-    MOOUNTABLE,
-    WALL
-}
-
 public interface Interactable
 {   
     // The spot the pirate needs to reach to interact in world space
@@ -24,6 +18,4 @@ public interface Interactable
     void Leave();
 
     Transform GetSeat();
-
-    InteractableType GetInteractableType();
 }

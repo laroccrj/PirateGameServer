@@ -22,7 +22,6 @@ public enum ServerPackets
     projectileSpawn,
     projectileUpdate,
     projectileHit,
-    updateWallHealth,
 }
 
 /// <summary>Sent from client to server.</summary>

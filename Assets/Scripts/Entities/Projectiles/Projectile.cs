@@ -7,11 +7,11 @@ public enum ProjectileType
     CANNON_BALL = 1
 }
 
-public abstract class Projectile : Entity
+public abstract class Projectile : MonoBehaviour
 {
-    public override EntityType EntityType => EntityType.PROJECTILE;
+    public int id;
     public Rigidbody2D rigid;
-    public Mountable mount;
+    public BoatEntity firedBy;
 
     public abstract ProjectileType ProjectileType
     {

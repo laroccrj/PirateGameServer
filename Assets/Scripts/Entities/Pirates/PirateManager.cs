@@ -116,11 +116,11 @@ public class PirateManager : MonoBehaviour
         }
 
         int id = packet.ReadInt();
-        InteractableType interactableType = (InteractableType) packet.ReadInt();
+        BoatEntityType boatEntityType = (BoatEntityType) packet.ReadInt();
         InteractionType interactionType = (InteractionType) packet.ReadInt();
 
         Pirate pirate = PirateManager.instance.Pirates[clientId];
-        Interactable interactable = pirate.boat.GetInteractableByInteracbleTypeAndId(interactableType, id);
+        Interactable interactable = pirate.boat.GetInteractableEntityByTypeAndId(boatEntityType, id);
 
         if (interactable != null)
             pirate.BeginInteractWith(interactable, interactionType);

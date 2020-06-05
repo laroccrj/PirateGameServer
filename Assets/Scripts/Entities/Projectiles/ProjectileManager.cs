@@ -18,8 +18,9 @@ public class ProjectileManager : MonoBehaviour
         {
             packet.Write(projectile.id);
             packet.Write((int) projectile.ProjectileType);
-            packet.Write(projectile.mount.boat.id);
-            packet.Write(projectile.mount.id);
+            packet.Write(projectile.firedBy.boat.id);
+            packet.Write(projectile.firedBy.id);
+            packet.Write((int)projectile.firedBy.BoatEntityType);
 
             ServerSend.SendUDPDataToAll(packet);
         }
